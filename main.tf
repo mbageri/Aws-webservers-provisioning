@@ -12,7 +12,7 @@ resource "aws_launch_configuration" "example" {
   user_data = <<-EOF
               #!/bin/bash
               echo "Hello, World" > index.html
-              nohup busybox httpd -f -p "${var.server_port}" &
+              nohup busybox httpd -f -p "${var.SERVER_PORT}" &
               EOF
 			  
   lifecycle {
@@ -45,7 +45,7 @@ resource "aws_elb" "example" {
   listener {
     lb_port           = 80
     lb_protocol       = "http"
-    instance_port     = "${var.server_port}"
+    instance_port     = "${var.SERVER_PORT}"
     instance_protocol = "http"
   }
   
@@ -54,6 +54,6 @@ resource "aws_elb" "example" {
     unhealthy_threshold = 2
     timeout             = 3
     interval            = 30
-    target              = "HTTP:${var.server_port}/"
+    target              = "HTTP:${var.SERVER_PORT}/"
   }
 }
