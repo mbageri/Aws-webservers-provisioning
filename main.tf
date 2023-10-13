@@ -1,13 +1,13 @@
 data "aws_availability_zones" "all" {}
 
-module "security_groups" {
+module "my-security_groups" {
   source = "git::https://github.com/mbageri/Aws-Securitygroups"
 }
 
 resource "aws_launch_configuration" "example" {
   image_id		    = var.AMI_ID
   instance_type   = var.INSTANCE_TYPE
-  security_groups = [module.security_groups.aws_security_group.instance.id]
+  security_groups = ["${module.my-security_groups.instance, module.my-security_groups.elb}"]
   
   user_data = <<-EOF
               #!/bin/bash
@@ -40,7 +40,7 @@ resource "aws_autoscaling_group" "example" {
 resource "aws_elb" "example" {
   name               = "terraform-asg-example"
   availability_zones = ["${data.aws_availability_zones.all.names[0]}"]
-  security_groups    = [module.security_groups.aws_security_group.elb.id]
+  security_groups    = ["${module.my-security_groups.aws_security_group.elb.id}"]
   
   listener {
     lb_port           = 80
