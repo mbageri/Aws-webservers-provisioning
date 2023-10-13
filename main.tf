@@ -1,7 +1,7 @@
 data "aws_availability_zones" "all" {}
 
 module "security_groups" {
-  source = "git@github.com:mbageri/Aws-Securitygroups.git"
+  source = "https://github.com/mbageri/Aws-Securitygroups.git"
 }
 
 resource "aws_launch_configuration" "example" {
