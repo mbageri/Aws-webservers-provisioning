@@ -1,7 +1,7 @@
 data "aws_availability_zones" "all" {}
 
 module "security_groups" {
-  source = "https://github.com/mbageri/Aws-Securitygroups.git"
+  source = "git::https://github.com/mbageri/Aws-Securitygroups"
 }
 
 resource "aws_launch_configuration" "example" {
@@ -37,7 +37,7 @@ resource "aws_autoscaling_group" "example" {
   }
 }
 
-resource "aws_elb" "example" {
+resource "aws_elb" "exampl" {
   name               = "terraform-asg-example"
   availability_zones = ["${data.aws_availability_zones.all.names[0]}"]
   security_groups    = ["${aws_security_group.elb.id}"]
