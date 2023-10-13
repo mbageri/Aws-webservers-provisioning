@@ -31,7 +31,7 @@ variable "KEY_NAME" {
 
 }
 
-variable "server_port" {
+variable "SERVER_PORT" {
   description = "The port the server will use for HTTP requests"
   default = "8080"
 }
