@@ -1,36 +1,7 @@
 data "aws_availability_zones" "all" {}
 
-resource "aws_security_group" "instance" {
-  name = "terraform-example-instance"
-  
-  ingress {
-    from_port	  = "${var.server_port}"
-    to_port		  = "${var.server_port}"
-    protocol	  = "tcp"
-    cidr_blocks	= ["0.0.0.0/0"]
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-resource "aws_security_group" "elb" {
-  name = "terraform-example-elb"
-  
-  ingress {
-    from_port	  = 80
-	  to_port		  = 80
-	  protocol	  = "tcp"
-	  cidr_blocks	= ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port	  = 0
-	  to_port		  = 0
-	  protocol	  = "-1"
-	  cidr_blocks	= ["0.0.0.0/0"]
-  }
+module "security_groups" {
+  source = "git@github.com:mbageri/Aws-Securitygroups.git"
 }
 
 resource "aws_launch_configuration" "example" {
