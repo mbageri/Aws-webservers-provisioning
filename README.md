@@ -1,4 +1,4 @@
-# Terraform Web Server with vars example
+# Terraform Web Server
 
 This folder contains a web server with vars example of a [Terraform](https://www.terraform.io/) file on AWS (Amazon Web Services).
 
