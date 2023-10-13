@@ -7,7 +7,7 @@ module "my-security_groups" {
 resource "aws_launch_configuration" "example" {
   image_id		    = var.AMI_ID
   instance_type   = var.INSTANCE_TYPE
-  security_groups = ["${module.my-security_groups.instance, module.my-security_groups.elb}"]
+  security_groups = ["${module.my-security_groups.aws_security_group.instance.id}"]
   
   user_data = <<-EOF
               #!/bin/bash
